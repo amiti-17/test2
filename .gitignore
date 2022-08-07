@@ -4,8 +4,6 @@
 
 # Node
 node_modules
-/node_modules
-node_modules/
 
 # MacOS
 .DS_Store
