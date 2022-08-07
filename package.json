@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "lint:html": "linthtml src/**/*.html",
+  "lint:css": "stylelint **/*.scss",
+  "lint:js": "eslint ./src",
+  "lint": "concurrently \"npm run lint:html\" \"npm run lint:css\" \"npm run lint:js\"",
   "scripts": {
     "start": "parcel ./index.html --open"
   },
@@ -18,6 +22,14 @@
   },
   "homepage": "https://github.com/amiti-17/JS-learn#readme",
   "devDependencies": {
-    "parcel": "^1.12.3"
+    "@linthtml/linthtml": "^0.8.6",
+    "@mate-academy/linthtml-config": "^0.0.2",
+    "concurrently": "^7.3.0",
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "parcel": "^1.12.3",
+    "stylelint": "^14.9.1",
+    "stylelint-config-standard-scss": "^5.0.0"
   }
 }
