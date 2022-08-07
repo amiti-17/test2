@@ -1,2 +1,2 @@
-# JS-learn
-i`ll try different features...
+# JS-learn-template
+Was created for making other project.
