@@ -14,3 +14,7 @@ console.log('a', a());
 console.log('b', b());
 console.log('c', c());
 console.log('c', c());
+console.log('a', a());
+console.log('a', a());
+console.log('a', a());
+console.log('a', a());
