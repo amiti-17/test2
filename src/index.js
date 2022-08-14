@@ -1,15 +1,22 @@
-let users = [
-  { name: "John", age: 20, surname: "Johnson" },
-  { name: "Pete", age: 18, surname: "Peterson" },
-  { name: "Ann", age: 19, surname: "Hathaway" },
-  { name: "Tim", age: 17, surname: "Shkandiuk"}
-];
+function makeArmy() {
+  let shooters = [];
 
-function byField(field) {
-  return (function(a, b) { 
-    console.log(a[field])
-    return (a[field] > b[field] ? 1 : -1);
-})}
+  let i = 0;
+  while (i < 10) {
+    const a = i;
+    const shooter = function() { // функция shooter
+      // должна выводить порядковый номер
+      console.log(a);
+    };
+    shooters.push(shooter);
+    i++;
+  }
 
-users.sort(byField('surname'));
-console.log(users);
+  return shooters;
+}
+
+const army = makeArmy();
+
+army[0](); // у 0-го стрелка будет номер 10
+army[5](); // и у 5-го стрелка тоже будет номер 10
+// ... у всех стрелков будет номер 10, вместо 0, 1, 2, 3...
