@@ -1,20 +1,45 @@
 function makeCounter() {
-  let counter = 0;
-  return (function() {
-    return counter++;
-  });
+  let count = 0;
+  function counter() {
+    return count++;
+  };
+  counter.set = function(x) {
+    count = x;
+    return count;
+  }
+  counter.decrease = function() {
+    return --count;
+  }
+  return counter;
 }
-const a = makeCounter();
-const b = makeCounter();
-const c = makeCounter();
-console.log('a', a());
-console.log('b', b());
-console.log('a', a());
-console.log('a', a());
-console.log('b', b());
-console.log('c', c());
-console.log('c', c());
-console.log('a', a());
-console.log('a', a());
-console.log('a', a());
-console.log('a', a());
+
+let counter = makeCounter();
+
+alert( counter() ); // 0
+alert( counter() ); // 1
+
+counter.set(10); // установить новое значение счётчика
+
+alert( counter() ); // 10
+
+counter.decrease(); // уменьшить значение счётчика на 1
+
+alert( counter() ); // 10 (вместо 11)
+
+// =======
+// function sum(a) {
+//   let currentSum = a;
+//   function f(b) {
+//     currentSum += b;
+//     return f;
+//   }
+//   f.toString = function() {
+//     return currentSum;
+//   };
+//   return f;
+// }
+// console.log( sum(1)(2).toString()); // 3
+// document.write( sum(5)(-1)(2) + "<br>"); // 6
+// document.write( sum(6)(-1)(-2)(-3) + "<br>"); // 0
+// document.write( sum(0)(1)(2)(3)(4)(5) + "<br>"); // 15
+// >>>>>>> master
