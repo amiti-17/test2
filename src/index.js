@@ -1,20 +1,15 @@
-function printNumbers(from, to) {
-  function subprintNumbers(i) {
-    const idinterval = setInterval(() => {
-      if (i <= to) {
-        document.write(i++, '<br>');
-      } else {
-        clearInterval(idinterval);
-      }
-    }, 1000);
-  }
-  return subprintNumbers(from);
+function askPassword(ok, fail) {
+  const password = prompt('Password?', '');
+  if (password === 'rockstar') ok();
+  else fail();
 }
 
-// function printNumbers(from, to) {
-//   setTimeout(function run() {
-//     if (from <= to) document.write(from++, '<br>'); setTimeout(run, 1000);
-//   }, 1000);
-// }
+const user = {
+  name: 'John',
 
-printNumbers(1, 10);
+  login(result) {
+    alert(this.name + (result ? ' logged in' : ' failed to log in'));
+  },
+};
+
+askPassword(user.login.bind(user, true), user.login.bind(user, false));
