@@ -1,15 +1,21 @@
-function askPassword(ok, fail) {
-  const password = prompt('Password?', '');
-  if (password === 'rockstar') ok();
-  else fail();
-}
-
-const user = {
-  name: 'John',
-
-  login(result) {
-    alert(this.name + (result ? ' logged in' : ' failed to log in'));
+const hamster = {
+  eat(food) {
+    this.stomach ? this.stomach.push(food) : this.stomach = []
+    this.stomach.push(food);
   },
 };
 
-askPassword(user.login.bind(user, true), user.login.bind(user, false));
+const speedy = {
+  __proto__: hamster,
+};
+
+const lazy = {
+  __proto__: hamster,
+};
+
+// Этот хомяк нашёл еду
+speedy.eat('apple');
+console.log(speedy.stomach); // apple
+
+// У этого хомяка тоже есть еда. Почему? Исправьте
+console.log(lazy.stomach); // apple
