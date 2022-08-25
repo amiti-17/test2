@@ -1,21 +1,19 @@
-const hamster = {
-  eat(food) {
-    this.stomach ? this.stomach.push(food) : this.stomach = []
-    this.stomach.push(food);
-  },
-};
+// Function.prototype.defer = function(ms, ...args) {
+//   setTimeout(() => this(...args), ms);
+// }
+// function f(name) {
+//   console.log(name);
+// }
 
-const speedy = {
-  __proto__: hamster,
-};
+// f.defer(1000, 'tim');
 
-const lazy = {
-  __proto__: hamster,
-};
+Function.prototype.defer = function(ms) {
+  return (...args) => {
+    setTimeout(() => {this(...args)}, ms);
+  }
+}
+function f(a, b) {
+  console.log( a + b );
+}
 
-// Этот хомяк нашёл еду
-speedy.eat('apple');
-console.log(speedy.stomach); // apple
-
-// У этого хомяка тоже есть еда. Почему? Исправьте
-console.log(lazy.stomach); // apple
+f.defer(1000)(1, 5)
