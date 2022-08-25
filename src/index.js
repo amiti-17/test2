@@ -1,19 +1,30 @@
-// Function.prototype.defer = function(ms, ...args) {
-//   setTimeout(() => this(...args), ms);
+let dictionary = Object.create(null, {toString: {
+  "writable": true,
+  "configurable": true,
+  value() {return Object.keys(this).join(', ')},
+}});
+
+// ваш код, который добавляет метод dictionary.toString
+
+// Object.defineProperty(dictionary, "toString", {
+//   "writable": true,
+//   "enumerable": false,
+//   "configurable": true,
+// });
+
+// dictionary.toString = function() {
+//   return Object.keys(this).join(', ')
 // }
-// function f(name) {
-//   console.log(name);
-// }
 
-// f.defer(1000, 'tim');
+// добавляем немного данных
+dictionary.apple = "Apple";
+dictionary.__proto__ = "test"; // здесь __proto__ -- это обычный ключ
 
-Function.prototype.defer = function(ms) {
-  return (...args) => {
-    setTimeout(() => {this(...args)}, ms);
-  }
-}
-function f(a, b) {
-  console.log( a + b );
+// только apple и __proto__ выведены в цикле
+for(let key in dictionary) {
+  console.log(key); // "apple", затем "__proto__"
 }
 
-f.defer(1000)(1, 5)
+
+// ваш метод toString в действии
+alert(dictionary); // "apple,__proto__"
