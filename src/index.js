@@ -1,73 +1,81 @@
-// class Clock{
-//   constructor (template) {
-//     let timer;
-//     this.render = function () {
-//       let date = new Date();
+function concatination(stringA, stringB) {
+  return stringA + stringB;
+}
 
-//       let hours = date.getHours();
-//       if (hours < 10) hours = '0' + hours;
+class Clock {
+  constructor({ template }) {
+    this.template = template;
+  }
 
-//       let mins = date.getMinutes();
-//       if (mins < 10) mins = '0' + mins;
+  render() {
+    const date = new Date();
 
-//       let secs = date.getSeconds();
-//       if (secs < 10) secs = '0' + secs;
+    let hours = date.getHours();
+    if (hours < 10) hours = concatination('0', hours);
 
-//       let output = template
-//         .replace('h', hours)
-//         .replace('m', mins)
-//         .replace('s', secs);
+    let mins = date.getMinutes();
+    if (mins < 10) mins = concatination('0', mins);
 
-//       console.log(output + ": clock 22");
-//     };
-//     this.start = function() {
-//       this.render();
-//       timer = setInterval(this.render, 1000);
-//     };
-//     this.stop = function() {
-//       clearInterval(timer);
-//     };
-//   }
-// }
+    let secs = date.getSeconds();
+    if (secs < 10) secs = concatination('0', secs);
 
+    const output = this.template
+      .replace('h', hours)
+      .replace('m', mins)
+      .replace('s', secs);
 
+    console.log(output);
+  }
 
-// let clock = new Clock('h:m:s');
-// console.log(clock)
-// clock.start();
+  stop() {
+    clearInterval(this.timer);
+  }
 
-// function Clock1({ template }) {
-  
-//   let timer;
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), 1000);
+  }
+}
 
-//   function render() {
-//     let date = new Date();
+class ExtendedClock extends Clock {
+  constructor(option) {
+    super(option);
+    const { precision = 1000 } = option;
+    this.precision = precision;
+  }
 
-//     let hours = date.getHours();
-//     if (hours < 10) hours = '0' + hours;
+  start() {
+    this.render();
 
-//     let mins = date.getMinutes();
-//     if (mins < 10) mins = '0' + mins;
+    this.timer = setInterval(() => this.render(), this.precision);
+  }
+}
 
-//     let secs = date.getSeconds();
-//     if (secs < 10) secs = '0' + secs;
+class ExtendedClock2 extends ExtendedClock {
+  constructor(option) {
+    super(option);
+    const { third = 1000 } = option;
+    this.third = third;
+  }
 
-//     let output = template
-//       .replace('h', hours)
-//       .replace('m', mins)
-//       .replace('s', secs);
+  start() {
+    this.render();
 
-//     console.log(output + ": clock 1");
-//   }
+    this.timer = setInterval(() => this.render(), this.precision + this.third);
+  }
+}
 
-//   this.stop = function() {
-//     clearInterval(timer);
-//   };
+const lowResolutionClock = new ExtendedClock({
+  template: 'h:m:s',
+  precision: 1000,
+});
 
-//   this.start = function() {
-//     render();
-//     timer = setInterval(render, 1000);
-//   };
+lowResolutionClock.start();
 
-// }
-h
+const middleResolutionClock = new ExtendedClock2({
+  template: 'h:m:s',
+  precision: 5000,
+  fourth: 1000,
+});
+
+//middleResolutionClock.start();
