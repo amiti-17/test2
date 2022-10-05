@@ -27,7 +27,7 @@
   "devDependencies": {
     "@linthtml/linthtml": "^0.8.6",
     "@mate-academy/linthtml-config": "^0.0.2",
-    "concurrently": "^7.3.0",
+    "concurrently": "^7.4.0",
     "eslint": "^8.21.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
