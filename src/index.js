@@ -1,13 +1,36 @@
-let array = [1, 2, 3];
+const handlers = Symbol('handlers');
 
-array = new Proxy(array, {
-  get(target, index, reciever) {
-    if (index < 0) {
-      index = target.length + +index;
-    }
-    return Reflect.get(target, index, reciever);
-  },
+function makeObservable(target) {
+  target[handlers] = [];
+
+  target.observe = function (handler) {
+    this[handlers].push(handler);
+  };
+  return new Proxy(target, {
+    // get(target, prop, reciever) {
+    //   let value = Reflect.get(...arguments);
+    //   // target.observe(prop, value);
+    //   return value;
+    // },
+    set(target, prop, value, reciever) {
+      let result = Reflect.set(...arguments);
+      if (result) {
+        target[handlers].forEach((handler) => {
+          handler(prop, value);
+        });
+      }
+      return result;
+    },
+  });
+}
+
+let user = {};
+
+user = makeObservable(user);
+
+user.observe((key, value) => {
+  alert(`SET ${key}=${value}`);
 });
 
-console.log(array[-1]); // 3
-console.log(array[-3]); // 2
+user.name = 'John'; // alerts: SET name=John
+user.name = 'Tim';
