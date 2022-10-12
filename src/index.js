@@ -1,23 +1,13 @@
-let user = {
-  name: 'John',
-};
+let array = [1, 2, 3];
 
-function wrap(target) {
-  return new Proxy(target, {
-    get(target, prop, reciever) {
-      if (Reflect.has(...arguments)) {
-        return Reflect.get(...arguments);
-      } else {
-        throw new Error(`Свойство не существует: "${prop}"`);
-      }
-    },
-  });
-}
+array = new Proxy(array, {
+  get(target, index, reciever) {
+    if (index < 0) {
+      index = target.length + +index;
+    }
+    return Reflect.get(target, index, reciever);
+  },
+});
 
-user = wrap(user);
-try {
-  console.log(user.name); // John
-  console.log(user.age); // Ошибка: такого свойства не существует
-} catch (error) {
-  console.log(error.name);
-}
+console.log(array[-1]); // 3
+console.log(array[-3]); // 2
