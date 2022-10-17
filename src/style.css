@@ -1,3 +1,13 @@
 body {
     background-color: bisque;
 }
+<style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      border: 1px solid black;
+      padding: 3px 5px;
+    }
+  </style>
