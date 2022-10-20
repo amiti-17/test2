@@ -9,11 +9,18 @@
     <link rel="stylesheet" href="src/style.css">
   </head>
   <body>
-    <div data-widget-name="menu">Choose the genre</div>
-  
+    <ol id="elem">
+      <li>Привет</li>
+      <li>Мир</li>
+    </ol>
+    
     <script>
-      let quer = document.querySelector('[data-widget-name]')
-      console.log(quer.dataset.widgetName)
+      function clear(elem) {
+        let clon = elem.cloneNode(false)
+        elem.replaceWith(clon)
+      }
+    
+      clear(elem);
     </script>
   </body>
 </html>
