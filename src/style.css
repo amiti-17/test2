@@ -1,3 +1,7 @@
 body {
     background-color: bisque;
 }
+.welcome {
+    background-color: aquamarine;
+    width: max-content;
+}
