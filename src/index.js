@@ -1,17 +1,24 @@
-function showNotification(obj) {
-  const { className, html, right, top } = obj;
-  const div = document.createElement('div');
-  div.classList = className;
-  div.textContent = html;
-  div.style.right = right;
-  div.style.top = top;
-  document.body.append(div);
-  setTimeout(() => div.remove(), 1500);
-}
-
-showNotification({
-  className: 'welcome', // дополнительный класс для div (необязательно)
-  html: 'What`s problem?', // HTML-уведомление
-  top: 10, // 10px от верхней границы окна (по умолчанию 0px)
-  right: 10, // 10px от правого края окна (по умолчанию 0px)
-});
+let table = document.getElementById('grid')
+let collator = new Intl.Collator("ru-RU", { numeric: true })
+table.addEventListener('click', function (event) {
+  if (event.target.tagName != 'TH') { return }
+  let arr = []
+  let arrI = [];
+  for (let elem of event.target.parentNode.children) {
+    arrI.push(elem.innerHTML)
+  }
+  let indexOfSortColumn = arrI.indexOf(event.target.innerHTML)
+  console.log()
+  for (let elem of table.lastElementChild.children) {
+    arr.push(elem);
+  }
+  console.log(arr[0].children[indexOfSortColumn])
+  arr.sort((first, second) => {
+    console.log(first.children[indexOfSortColumn].innerHTML, second.children[indexOfSortColumn].innerHTML, collator.compare(first.children[indexOfSortColumn].innerHTML, second.children[indexOfSortColumn].innerHTML))
+    return collator.compare(first.children[indexOfSortColumn].innerHTML, second.children[indexOfSortColumn].innerHTML)
+  })
+  arr.forEach((el) => table.lastElementChild.append(el))
+  //table.lastElementChild.prepend(arr)
+  console.log(table.lastElementChild)
+  console.log(arr)
+})

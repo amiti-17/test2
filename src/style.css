@@ -1,7 +1,16 @@
 body {
     background-color: bisque;
 }
-.welcome {
-    background-color: aquamarine;
-    width: max-content;
-}
+table {
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 4px;
+  }
+  th {
+    cursor: pointer;
+  }
+  th:hover {
+    background: yellow;
+  }
